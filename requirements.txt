@@ -1,0 +1,6 @@
+Django
+django-redis
+mysqlclient
+uwsgi
+
+

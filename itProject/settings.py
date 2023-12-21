@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'member'
 ]
 
 MIDDLEWARE = [
@@ -71,11 +72,13 @@ TEMPLATES = [
 
 CACHES = {
     "default": {
-        # 預設使用
+        # 預設使用redis://<redis_host>:<redis_port>/<db_number>
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379", # 指定redis://IP/第幾個DB
+        # 指定redis://IP/第幾個DB
+        "LOCATION" : "redis://127.0.0.1:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": "*****",
         },
         'KEY_PREFIX': 'Cache'
     }
@@ -92,11 +95,11 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'ItDb',
+        'NAME' : 'ItDB',
         'USER' : 'root',
-        'PASSWORD' : 'Dev127336',
-        'HOST' : '127.0.0.1',
-        'PORT': '3306',
+        'PASSWORD' : '******',
+        'HOST' :'127.0.0.1',
+        'PORT': '3306'
     }
 }
 
@@ -120,6 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -137,10 +141,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS =[
-    os.path.join(BASE_DIR,'static')
-]
+# STATICFILES_DIRS =[
+#     os.path.join(BASE_DIR,'static')
+# ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
